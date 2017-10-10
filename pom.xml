@@ -34,7 +34,7 @@
     <artifactId>slf4j-bom</artifactId>
     <version>1.7.26-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>SLF4J BOM</name>
+    <name>Eonian SLF4J BOM</name>
     <description>Bill of materials for SLF4J.</description>
     <url>https://github.com/eonian-technologies/slf4j-bom</url>
 
