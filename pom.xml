@@ -23,16 +23,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.eoniantech.build</groupId>
-        <artifactId>parent-pom</artifactId>
-        <version>1.0</version>
-        <relativePath>../parent-pom/pom.xml</relativePath>
-    </parent>
-
     <groupId>com.eoniantech.build</groupId>
     <artifactId>slf4j-bom</artifactId>
-    <version>1.7.26-SNAPSHOT</version>
+    <version>1.8.0-beta2</version>
     <packaging>pom</packaging>
     <name>Eonian SLF4J BOM</name>
     <description>Bill of materials for SLF4J.</description>
@@ -116,4 +109,70 @@
             <timezone>-5</timezone>
         </developer>
     </developers>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Nexus plugin for deploying to the Sonatype repo. -->
+                <!-- Automatically bound to the deploy goal. -->
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.8</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>    
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Sign the artifacts with GnuPG -->
+        <profile>
+            <id>sign</id> 
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-gpg-plugin</artifactId>
+                            <version>1.6</version>
+                            <executions>
+                                <execution>
+                                    <id>sign-artifacts</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>sign</goal>
+                                    </goals> 
+                                    <configuration>
+                                        <gpgArguments>
+                                            <arg>--pinentry-mode</arg>
+                                            <arg>loopback</arg>
+                                        </gpgArguments> 
+                                        <passphraseServerId>${gpg.keyName}</passphraseServerId>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                    </plugin> 
+                </plugins> 
+            </build>
+        </profile>
+    </profiles>
 </project>
