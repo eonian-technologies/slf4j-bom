@@ -10,7 +10,7 @@ In your parent POM or project POM, add the BOM to the `dependencyManagement` sec
         <dependency>
             <groupId>com.eoniantech.build</groupId>
             <artifactId>slf4j-bom</artifactId>
-            <version>1.7.25</version>
+            <version>1.8.0-beta2</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency> 
