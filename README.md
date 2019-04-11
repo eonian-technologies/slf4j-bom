@@ -16,7 +16,7 @@ In your parent POM or project POM, add the BOM to the `dependencyManagement` sec
         </dependency> 
         ...
     </dependencies> 
-<dependencyManagement>
+</dependencyManagement>
 ```
 
 Then, in the `dependencies` section of your project POM, depend on specific slf4j components without the version:
